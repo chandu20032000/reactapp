@@ -2,24 +2,26 @@ import {React,Component} from 'react';
 import {Link} from 'react-router-dom';
 import { Container,Row,Col,Form,Button} from 'react-bootstrap';
 import NavigationBar from '../../nav/NavigationBar';
+import Signupuser from "../../Services/User/SignupService"
 class Signup extends Component{
    constructor(props)
    {
        super(props);
        this.state={
+           sstatus:"",
          semail:"",
          susername:"",
          smobile:"",
          spass:"",
          sconpass:"",
-         saddress :"",
+         
          semailerror:"",
          susernameerror:" ",
          smobileerror:"",
          spasserror:"",
          spasserror1:"",
          sconpasserror:"",
-         saddresserror:""
+         
       
             }
        this.semailchange=this.semailchange.bind(this);
@@ -27,7 +29,7 @@ class Signup extends Component{
        this.smobilechange=this.smobilechange.bind(this);
        this.spasschange=this.spasschange.bind(this);
        this.sconpasschange=this.sconpasschange.bind(this);
-       this.saddresschange= this.saddresschange.bind(this);
+       
        this.svalidateform=this.svalidateform.bind(this);
    }
   semailchange=(event)=>{
@@ -51,9 +53,6 @@ class Signup extends Component{
    this.setState({
        sconpass: event.target.value});
   }
-  saddresschange=(event)=>{
-     this.setState({saddress: event.target.value});
-  }
   
   svalidateform=(e)=>
   {
@@ -63,13 +62,13 @@ class Signup extends Component{
    document.getElementById('mobileNumber').style.border="";
    document.getElementById('password').style.border="";
    document.getElementById('confirmPassword').style.border="";
-   document.getElementById('address').style.border="";
+  
    this.setState({semailerror: ""})
    this.setState({susernameerror: ""})
    this.setState({smobileerror: ""})
    this.setState({spasserror: ""})
    this.setState({sconpasserror: ""})
-   this.setState({saddresserror: ""})
+  
    
    if(this.state.semail==="")
    {
@@ -120,14 +119,36 @@ class Signup extends Component{
        this.setState({sconpasserror:"Password not matched!!"})
        document.getElementById('confirmPassword').style.border="2px solid red";
    }
-   else if(this.state.saddress==="")
-   {
-       this.setState({saddresserror:"Please enter the address"})
-       document.getElementById('address').style.border="2px solid red";
-   }   
+   
+   else
+    {    
+        let user={
+            username:this.state.susername,
+            email:this.state.semail,
+            password:this.state.spass,
+            mobileNumber:this.state.smobile
+                  }
+        console.log(user)
+        
+        Signupuser.createUser(user).then((res)=>{
+            console.log(res)
+            if(res.status===200)
+            {
+                this.setState({
+                    sstatus:"Your registration is successfull!. Please Login !!"
+                })
+               
+           this.props.history.push('/')
+            }
+          console.log(res);
+        });
+            
+    
+        
+        
+    }
 
-
-
+    
    
   }
     render(){
@@ -164,10 +185,8 @@ class Signup extends Component{
                               <Form.Control type="password" value={this.state.sconpass} onChange={this.sconpasschange}  placeholder="Confirm password" />
                            </Form.Group>
                            <p style={{color: "red"}}>{this.state.sconpasserror}</p> 
-                           <Form.Group className="mb-3" controlId="address">
-                           <Form.Control as="textarea" value={this.state.saddress} onChange={this.saddresschange} rows={3} placeholder="Enter Address" />
-                           </Form.Group>
-                           <p style={{color: "red"}}>{this.state.saddresserror}</p> 
+                           
+                           <p style={{color: "red"}}>{this.state.sstatus}</p> 
                            <Form.Group className="mb-2" controlId="Existing">
                               <Link to='/' >Already a user? Login</Link>
                            </Form.Group>

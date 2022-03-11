@@ -29,11 +29,11 @@ render(){
           <NavDropdown.Item href="#kids/party">Party</NavDropdown.Item>
           </NavDropdown>
         </Nav>
-        <div class="input-group">
-    <div id="search-autocomplete" class="ml-auto">
-      <input type="search" id="form1" class="form-control" placeholder ="Search" />
+        <div className="input-group">
+    <div id="search-autocomplete" className="ml-auto">
+      <input type="search" id="form1" className="form-control" placeholder ="Search" />
       </div>
-    <button type="button" class="btn btn-primary">
+    <button type="button" className="btn btn-primary">
       <i  ><img src="https://img.icons8.com/external-others-royyan-wijaya/20/000000/external-interface-revamp-4-others-royyan-wijaya-2.png"/></i>
     </button>
   </div>

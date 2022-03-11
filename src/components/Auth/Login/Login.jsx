@@ -1,8 +1,9 @@
 import {React,Component} from 'react';
 import {Link} from 'react-router-dom';
-import { Navbar, Nav, Container, NavDropdown, Row,Col} from 'react-bootstrap';
-import {Form, FormControl, Button,Card} from 'react-bootstrap';
-import Image from 'react';
+import { Container, Row,Col} from 'react-bootstrap';
+import {Form,Button,Card} from 'react-bootstrap';
+import LogiService from '../../Services/User/LogiService';
+
 import NavigationBar from '../../nav/NavigationBar';
 
 import './Login.css';
@@ -52,6 +53,10 @@ class Login extends Component{
           this.setState({emailerror:"Email should not be empty"})
           document.getElementById('email').style.border="2px solid red";
       }
+      else if(this.state.email==="admin"&&this.state.pass==="admin")
+      {
+            this.props.history.push("/admin/listusers")
+      }
       else if(!this.state.email.includes("@"))
       { 
          document.getElementById('email').style.border="2px solid red";
@@ -64,6 +69,17 @@ class Login extends Component{
       { 
          document.getElementById('password').style.border="2px solid red";
           this.setState({passerror:"Invalid password"});
+      }
+      else{
+            let user={
+          email:this.state.email,
+          password:this.state.pass
+         
+                }
+                
+                LogiService.authUser(user).then((res)=>{
+                  this.props.history.push('/home')
+                })     
       }
    
    }
@@ -83,9 +99,10 @@ class Login extends Component{
  
     <div >
      <h1>LOG IN</h1>
-      <p>  <Link>Forgotten Your Password??</Link></p>
+      <p>  <Link to='/'>Forgotten Your Password??</Link></p>
+     
       <Form id ="log-in-form" >
-  <Form.Group className="mb-3" Id="email"  >
+  <Form.Group className="mb-3" id="email"  >
   <Form.Control  type="email" value={this.state.email}  onChange={this.emailchange}  placeholder="Enter email"  >
   </Form.Control>
   
@@ -127,8 +144,8 @@ class Login extends Component{
          <span>Refer to more people and get personalized discounts</span>
          </li>
         </ul>
-        <p ><h6>Join now and start earning points to access new levels and rewards. It's time to unlock the best of adidas.</h6></p>
-       <Link to='/sign-up'> <Button type="submit" class="gl-cta gl-cta--primary"  >Sign up</Button></Link>
+        <h6>Join now and start earning points to access new levels and rewards. It's time to unlock the best of adidas.</h6>
+       <Link to='/signup'> <Button type="submit" className="gl-cta gl-cta--primary"  >Sign up</Button></Link>
 
     </div>
     </div>
@@ -143,7 +160,7 @@ class Login extends Component{
     <Card.Text>
       Join the community and get upto 15% discount on limited edition items
     </Card.Text>
-    <Link to='/sign-up'> <Button type="submit" class="gl-cta gl-cta--primary"  >Sign up</Button></Link>
+    <Link to='/signup'> <Button type="submit" className="gl-cta gl-cta--primary"  >Sign up</Button></Link>
   </Card.Body>
   </Card>
   </Col>
