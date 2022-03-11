@@ -1,4 +1,4 @@
-import './sideNav.css'
+import './Sidenav.css'
 import {React,Component} from 'react';
 import {Link} from 'react-router-dom';
 import {Nav,Button} from 'react-bootstrap';
@@ -11,13 +11,13 @@ class SideNav extends Component{
             <Link to ="/admin-home"> <Button variant="dark">Dashboard</Button></Link>
             </Nav.Item>
             <Nav.Item className="mb-3">
-            <Link to ="/admin-userManagement"> <Button variant="dark">User</Button></Link>
+            <Link to ="/admin"> <Button variant="dark">User</Button></Link>
             </Nav.Item>
             <Nav.Item className="mb-3">
-            <Link to ="/admin-password"> <Button variant="dark">Password</Button></Link>
+            <Link to ="/admin"> <Button variant="dark">Password</Button></Link>
             </Nav.Item>
             <Nav.Item className="mb-3">
-            <Link to ="/admin-doc"> <Button variant="dark">Documentation</Button></Link>
+            <Link to ="/admin-edituser"> <Button variant="dark">Documentation</Button></Link>
             </Nav.Item>
             </Nav>
           
