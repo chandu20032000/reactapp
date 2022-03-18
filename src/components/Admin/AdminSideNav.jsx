@@ -14,7 +14,7 @@ class SideNav extends Component{
             <Link to ="/admin"> <Button variant="dark">User</Button></Link>
             </Nav.Item>
             <Nav.Item className="mb-3">
-            <Link to ="/admin"> <Button variant="dark">Password</Button></Link>
+            <Link to ="/addProduct"> <Button variant="dark">Product</Button></Link>
             </Nav.Item>
             <Nav.Item className="mb-3">
             <Link to ="/admin-edituser"> <Button variant="dark">Documentation</Button></Link>

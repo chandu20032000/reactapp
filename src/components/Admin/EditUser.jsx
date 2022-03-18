@@ -154,7 +154,7 @@ class EditUser extends Component{
                   <Col>
                     <Button variant ="success" type="submit" inline id="save" onClick={this.updateUser}> Save </Button>
                     <Button variant ="primary" type="reset" inline id="reset" onClick={this.restUser}> Reset </Button>
-                    <Button variant ="danger" type="cancel" inline id="cancel" onClick={this.cancelUser}> Cancel </Button>
+                    <Button variant ="danger" type="cancel" inline id="cancel" onClick={this.cancelUser}> Back </Button>
                   </Col>
                   </div>
                   <p style={{color:'green'}}>{this.state.status}</p>
