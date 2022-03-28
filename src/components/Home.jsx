@@ -5,13 +5,14 @@ import { Navbar, Nav, Container, NavDropdown, Row,Col,Table} from 'react-bootstr
 import {Form, FormControl, Button,Card} from 'react-bootstrap';
 import Image from 'react';
 import ProductService from './Services/Admin/ProductService';
+import ViewcartService from './Services/Cart/ViewcartService';
 class Home extends Component {
     constructor(props){
         super(props);
         this.state={
             products : []
         }
-      
+      this.addToCart=this.addToCart.bind(this);
     }
    
     componentDidMount(){
@@ -22,6 +23,12 @@ class Home extends Component {
            console.log(res.data)
         })
         
+    }
+    addToCart(id,product)
+    {
+       ViewcartService.addItemToCart(id,product).then((res)=>{
+           window.alert("added to cart")
+       })
     }
     render() {
         return (
@@ -47,7 +54,7 @@ class Home extends Component {
                                     </Card.Text>
                                      <div className="d-flex justify-content-between mb-2">
                                         <p className="text-muted mb-3">Available: <span className="fw-bold">{product.quantity}</span></p>
-                                         <Button variant="primary">Add to Cart</Button>
+                                         <Button variant="primary" onClick={()=>this.addToCart("Saichand900000@",product)}>Add to Cart</Button>
                                    </div>
                                   </Card.Body>
                                    </Card>

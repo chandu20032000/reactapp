@@ -1,42 +1,31 @@
-import { Navbar, Nav, Container, NavDropdown, Row,Col} from 'react-bootstrap';
+import { Navbar, Nav, Container, Button} from 'react-bootstrap';
+import {Link} from 'react-router-dom';
 import {Component} from 'react';
+import './navbar.css';
 class NavigationBar extends Component{
 render(){
     return (
     <Navbar className="navbar navbar-dark bg-dark" expand="lg">
     <Container fluid>
-      <Navbar.Brand href="#home">Footwear Store</Navbar.Brand>
+      <Link to="/home"><Navbar.Brand>Footwear Store</Navbar.Brand></Link>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="me-auto">
-          
-          <NavDropdown title="Men" id="basic-nav-dropdown">
-            <NavDropdown.Item href="#men/sports">Sports</NavDropdown.Item>
-            <NavDropdown.Item href="#men/casual">Casual</NavDropdown.Item>
-            <NavDropdown.Item href="#men/formal">Formal</NavDropdown.Item>
-            <NavDropdown.Item href="#men/party">Party</NavDropdown.Item>
-          </NavDropdown>
-          <NavDropdown title ="Women" id ="basic-nav-dropdown">
-          <NavDropdown.Item href="#women/sports">Sports</NavDropdown.Item>
-          <NavDropdown.Item href="#women/casual">Casual</NavDropdown.Item>
-          <NavDropdown.Item href="#women/formal">Formal</NavDropdown.Item>
-          <NavDropdown.Item href="#women/party">Party</NavDropdown.Item>
-          </NavDropdown>
-          <NavDropdown title ="Kids" id ="basic-nav-dropdown">
-          <NavDropdown.Item href="#kids/sports">Sports</NavDropdown.Item>
-          <NavDropdown.Item href="#kids/casual">Casual</NavDropdown.Item>
-          <NavDropdown.Item href="#kids/formal">Formal</NavDropdown.Item>
-          <NavDropdown.Item href="#kids/party">Party</NavDropdown.Item>
-          </NavDropdown>
-        </Nav>
-        <div className="input-group">
-    <div id="search-autocomplete" className="ml-auto">
-      <input type="search" id="form1" className="form-control" placeholder ="Search" />
-      </div>
-    <button type="button" className="btn btn-primary">
-      <i  ><img src="https://img.icons8.com/external-others-royyan-wijaya/20/000000/external-interface-revamp-4-others-royyan-wijaya-2.png"/></i>
-    </button>
-  </div>
+        <Nav.Item className="mb-3 itemDesign ">
+            <Link to ="/home"> <Button className ="buttonDesign" variant="dark">Home</Button></Link>
+            </Nav.Item>
+            <Nav.Item className="mb-3 itemDesign">
+            <Link to ="/cart"> <Button className="buttonDesign" variant="dark">cart</Button></Link>
+            </Nav.Item>
+            <Nav.Item className="mb-3 itemDesign">
+            <Link to ="/orders"> <Button className="buttonDesign" variant="dark"> My orders</Button></Link>
+            </Nav.Item>
+           </Nav>
+          <Nav>
+          <Nav.Item className="mb-3">
+            <Link to ="/"> <Button variant="dark">Logout</Button></Link>
+            </Nav.Item>
+          </Nav>
       </Navbar.Collapse>
     </Container>
   </Navbar>
