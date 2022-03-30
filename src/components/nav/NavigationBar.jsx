@@ -2,8 +2,29 @@ import { Navbar, Nav, Container, Button} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import {Component} from 'react';
 import './navbar.css';
+
 class NavigationBar extends Component{
+  constructor(props)
+  {
+    super(props);
+    this.state={
+      user: JSON.parse(localStorage.getItem('user'))
+    }
+    this.log_out=this.log_out.bind(this);
+    console.log(this.state.user)
+  }
+  
+ 
+  log_out=(e)=>{
+     this.setState({
+       user:null
+     }) 
+     localStorage.removeItem('user')
+    
+  }
 render(){
+  if(this.state.user!=null)
+  {
     return (
     <Navbar className="navbar navbar-dark bg-dark" expand="lg">
     <Container fluid>
@@ -23,13 +44,19 @@ render(){
            </Nav>
           <Nav>
           <Nav.Item className="mb-3">
-            <Link to ="/"> <Button variant="dark">Logout</Button></Link>
+             <Link to="/"><Button variant="dark" onClick={this.log_out}>Logout</Button></Link>
             </Nav.Item>
           </Nav>
       </Navbar.Collapse>
     </Container>
   </Navbar>
     )
+  }
+  else{
+    return(
+      <Link to="/"></Link>
+    )
+  }
  }
 
 

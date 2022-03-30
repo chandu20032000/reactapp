@@ -10,7 +10,9 @@ class Home extends Component {
     constructor(props){
         super(props);
         this.state={
-            products : []
+            email:this.props.location.state,
+            products : [],
+            user:JSON.parse(localStorage.getItem('user'))
         }
       this.addToCart=this.addToCart.bind(this);
     }
@@ -27,6 +29,9 @@ class Home extends Component {
     addToCart(id,product)
     {
        ViewcartService.addItemToCart(id,product).then((res)=>{
+           
+           console.log(id)
+           console.log(this.props.location.state.email)
            window.alert("added to cart")
        })
     }
@@ -41,21 +46,26 @@ class Home extends Component {
                   
                                {
                              this.state.products.map(
-                                 product=><Col className="col-md-12 col-lg-3 mb-2 mb-lg-0">
+                                 product=><Col className="col-md-12 col-lg-3 mb-2 mb-lg-0" key={product.productId} >
                                  <Card style={{margin:"10px"}}>
                               <Card.Title className="d-flex justify-content-between p-3 lead mb-0">Card Title</Card.Title>
                              <Card.Img variant="top" style={{height:"200px"}} src={product.imageUrl} />
                                    <Card.Body>
                
                                 <Card.Text className="d-flex justify-content-between mb-2">
-                 
-                                   <h5>{product.productName}</h5>
+                                
+                                     <h5>{product.productName}</h5>
+                                    
                                      <h5>{product.price}</h5>
+                                     
                                     </Card.Text>
-                                     <div className="d-flex justify-content-between mb-2">
+                                    <Card.Text className="d-flex justify-content-between mb-2">
+                                        
                                         <p className="text-muted mb-3">Available: <span className="fw-bold">{product.quantity}</span></p>
-                                         <Button variant="primary" onClick={()=>this.addToCart("Saichand900000@",product)}>Add to Cart</Button>
-                                   </div>
+                                         <Button variant="primary" onClick={()=>this.addToCart(this.props.location.state.email,product)}>Add to Cart</Button>
+                                   
+                                   </Card.Text>
+                                     
                                   </Card.Body>
                                    </Card>
                                      </Col> 

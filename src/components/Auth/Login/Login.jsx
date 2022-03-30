@@ -18,11 +18,19 @@ class Login extends Component{
         email:"",
         pass:"",
         emailerror:"",
-        passerror:""
+        passerror:"",
+        user:JSON.parse(localStorage.getItem('user'))
      }
      this.validatefrom=this.validatefrom.bind(this);
      this.emailchange=this.emailchange.bind(this);
       this.changepass=this.changepass.bind(this);
+  }
+  componentDidMount()
+  {
+    if(this.state.user)
+    {
+      this.props.history.push("/home")
+    }
   }
   emailchange=(event)=>
   {
@@ -78,7 +86,13 @@ class Login extends Component{
                 }
                 
                 LogiService.authUser(user).then((res)=>{
-                  this.props.history.push('/home')
+                  
+                  localStorage.setItem('user', JSON.stringify(res.data))
+                  console.log(res.data)
+                  console.log(JSON.stringify(res.data))
+                 
+                  this.props.history.go(0);
+
                 })     
       }
    
