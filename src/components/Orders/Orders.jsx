@@ -10,15 +10,18 @@ class Order extends Component{
     constructor(props){
         super(props);
         this.state={
-            items : []
+            items : [],
+            user:JSON.parse(localStorage.getItem('user'))
         }
 
     }
     componentDidMount(){
-       OrderService.getUserOrders("27").then((res)=>{
+       OrderService.getUserOrders(this.state.user.id.toString()).then((res)=>{
            this.setState({
                items:res.data
+              
            })
+           console.log(res.data)
        })
        
         
@@ -46,7 +49,7 @@ class Order extends Component{
                         {
                             this.state.items.map(
                                 item=>
-                                <tr key ={item.productId}>
+                                <tr key ={item.orderId}>
                                 <td className="text-break text-break text-center text-wrap">{item.productName}</td>
                                 <td className="text-break text-break text-center text-wrap">{item.price}</td>
                                 <td className="text-break text-break text-center text-wrap">{item.quantity}</td>

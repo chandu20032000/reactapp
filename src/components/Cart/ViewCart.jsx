@@ -7,6 +7,7 @@ import IncDec from './InDec';
 import ViewcartService from '../Services/Cart/ViewcartService';
 import OrderService from '../Services/Orders/OrderService';
 
+
 class ViewCart extends Component{
     constructor(props){
         super(props);
@@ -59,7 +60,7 @@ class ViewCart extends Component{
           
         )
         console.log(order)
-        OrderService.addToOrders("27",order).then((res)=>{
+        OrderService.addToOrders(this.state.user.id.toString(),order).then((res)=>{
             this.props.history.push("/orders");
         })
        
@@ -69,7 +70,36 @@ class ViewCart extends Component{
         if(this.state.user)
         {
 
-        
+        if(this.state.items.length==0){
+            return(
+                <div>
+                     <Row>
+                    <Col>
+                    <NavigationBar/>
+                    </Col>
+                </Row>
+                <Container className='px-4 py-5 mx-auto'>
+                <Row  className='d-flex justify-content-center'>
+                <Col className="col-9">
+                    <Card>
+                        
+                        <Card.Body>
+                        
+                        <img src="https://i.imgur.com/dCdflKN.png" width="130" height="130" className="img-fluid mb-4 mr-3"/>
+                        <h3><strong>Your Cart is Empty</strong></h3>
+                        <h4>Add something to make me happy :)</h4> 
+                        <Link to="/home" ><Button className="btn btn-primary cart-btn-transform m-3" data-abc="true">continue shopping</Button> </Link>
+                       
+                        </Card.Body>
+                    </Card>
+                    </Col>
+                </Row>
+                </Container>
+               
+                </div>
+            )
+        }
+        else{
         return(
             <div>
                 <Row>
@@ -77,13 +107,25 @@ class ViewCart extends Component{
                     <NavigationBar/>
                     </Col>
                 </Row>
+                <Container className='px-4 py-5 mx-auto'>
+              
+                <Row className='d-flex justify-content-center border-top border-bottom main align-items-center'>
+                    
                 <Row>
-                    <Col>
-                    <Table>
+                   <Col>
+                   <h4 className="heading">Shopping Cart</h4>
+                   </Col>
+                   <Col className='heading align-self-center text-right text-muted'>
+                     <h6> {this.state.items.length} items </h6>
+                   </Col>
+               </Row>
+                    
+                    <Col className='col-15'>
+                    <Table >
                     <thead>
                       <tr>
                           <th>Product Name</th>
-                          <th>Price</th>
+                          <th >Price</th>
                           <th>Quantity</th>
                           <th>Remove</th>
                       </tr>
@@ -93,10 +135,10 @@ class ViewCart extends Component{
                         {
                             this.state.items.map(
                                 item=>
-                                <tr key ={item.cartItemId}>
+                                <tr key ={item.cartItemID}>
                                 <td className="text-break text-break text-center text-wrap">{item.productName}</td>
                                 <td className="text-break text-break text-center text-wrap">{item.price}</td>
-                                <td><IncDec/> </td>
+                                <td><IncDec data={item}/> </td>
                                 <td><button onClick={()=>this.deleteItem(item.cartItemID)} style={{marginLeft: "10px"}} className="btn btn-danger">Remove</button></td>
                                 </tr>
                             )
@@ -105,10 +147,12 @@ class ViewCart extends Component{
                 </Table>
                     </Col>
                 </Row>
+                </Container>
                 <Button variant="primary" onClick={()=>this.addToOrders()}>Place Order</Button>
                 </div>  
            
         );
+                    }
                     }
         else{
             return(

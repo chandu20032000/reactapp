@@ -21,6 +21,10 @@ class ProductService  {
    {
        return axios.delete(USER_SERVICE_API3+"/"+id)
    }
+   increamentQuant(id,quantity)
+   {
+       return axios.put(USER_SERVICE_API2+"/update/"+id,quantity)
+   }
    
 }
 export default new ProductService()
