@@ -70,7 +70,7 @@ class ViewCart extends Component{
         if(this.state.user)
         {
 
-        if(this.state.items.length==0){
+        if(this.state.items.length===0){
             return(
                 <div>
                      <Row>
@@ -109,7 +109,7 @@ class ViewCart extends Component{
                 </Row>
                 <Container className='px-4 py-5 mx-auto'>
               
-                <Row className='d-flex justify-content-center border-top border-bottom main align-items-center'>
+                <Row className='d-flex justify-content-center main align-items-center'>
                     
                 <Row>
                    <Col>
@@ -121,7 +121,7 @@ class ViewCart extends Component{
                </Row>
                     
                     <Col className='col-15'>
-                    <Table >
+                    <Table className=' border-bottom main align-items-center' >
                     <thead>
                       <tr>
                           <th>Product Name</th>
@@ -131,13 +131,13 @@ class ViewCart extends Component{
                       </tr>
                     
                     </thead>
-                    <tbody>
+                    <tbody className='border-top border-bottom main '>
                         {
                             this.state.items.map(
                                 item=>
-                                <tr key ={item.cartItemID}>
-                                <td className="text-break text-break text-center text-wrap">{item.productName}</td>
-                                <td className="text-break text-break text-center text-wrap">{item.price}</td>
+                                <tr key ={item.cartItemID} >
+                                <td className="text-break text-break  text-wrap">{item.productName}</td>
+                                <td className="text-break text-break  text-wrap">{item.price}</td>
                                 <td><IncDec data={item}/> </td>
                                 <td><button onClick={()=>this.deleteItem(item.cartItemID)} style={{marginLeft: "10px"}} className="btn btn-danger">Remove</button></td>
                                 </tr>
@@ -147,8 +147,10 @@ class ViewCart extends Component{
                 </Table>
                     </Col>
                 </Row>
+                <Button className='align-items-center' variant="primary" onClick={()=>this.addToOrders()}>Place Order</Button>
                 </Container>
-                <Button variant="primary" onClick={()=>this.addToOrders()}>Place Order</Button>
+                
+               
                 </div>  
            
         );
