@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import { Container,Row,Col,Form,Button} from 'react-bootstrap';
 import NavigationBar from '../../nav/NavigationBar';
 import Signupuser from "../../Services/User/SignupService"
+import SignupService from '../../Services/User/SignupService';
 class Signup extends Component{
    constructor(props)
    {
@@ -75,6 +76,29 @@ class Signup extends Component{
        this.setState({semailerror:"Email should not be empty"})
        document.getElementById('email').style.border="2px solid red";
    }
+   else if(this.state.semail==="admin")
+      {
+        let admin={
+            username:this.state.susername,
+            email:this.state.semail,
+            password:this.state.spass,
+            role:"admin",
+            mobileNumber:this.state.smobile
+
+         
+                }
+               SignupService.createUser(admin).then((res)=>{
+                  
+                  localStorage.setItem('admin', JSON.stringify(res.data))
+                  console.log(res.data)
+                  console.log(JSON.stringify(res.data))
+                 
+                  this.props.history.push('/');
+
+                })     
+           
+            this.props.history.push("/admin/listusers")
+      }
    else if(!this.state.semail.includes("@"))
    {
        this.setState({semailerror:"Enter a valid Mail"})

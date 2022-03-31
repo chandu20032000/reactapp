@@ -61,9 +61,25 @@ class Login extends Component{
           this.setState({emailerror:"Email should not be empty"})
           document.getElementById('email').style.border="2px solid red";
       }
-      else if(this.state.email==="admin"&&this.state.pass==="admin")
+      else if(this.state.email==="admin")
       {
-            this.props.history.push("/admin/listusers")
+        let admin={
+          email:this.state.email,
+          password:this.state.pass
+         
+                }
+                LogiService.authUser(admin).then((res)=>{
+                  
+                  localStorage.setItem('admin', JSON.stringify(res.data))
+                  console.log(res.data)
+                  console.log(JSON.stringify(res.data))
+                 
+                  this.props.history.push('/admin');
+
+                })
+
+              
+            
       }
       else if(!this.state.email.includes("@"))
       { 

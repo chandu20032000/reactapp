@@ -64,6 +64,7 @@ class Order extends Component{
                 <Row>
                 <NavigationBar/>
                 </Row>
+
                <Col className='col-8'>
             <Container className='px-4 py-5 mx-auto'>
 
@@ -106,6 +107,10 @@ class Order extends Component{
                 </Row>
                 <Button type ="submit" variant="primary"> Pay </Button>
             </Container>
+            </Col>
+                
+            <Col>
+                
             </Col>
             
             </div>
