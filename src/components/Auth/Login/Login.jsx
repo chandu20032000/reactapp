@@ -19,7 +19,8 @@ class Login extends Component{
         pass:"",
         emailerror:"",
         passerror:"",
-        user:JSON.parse(localStorage.getItem('user'))
+        user:JSON.parse(localStorage.getItem('user')),
+        admin:JSON.parse(localStorage.getItem('admin'))
      }
      this.validatefrom=this.validatefrom.bind(this);
      this.emailchange=this.emailchange.bind(this);
@@ -30,6 +31,10 @@ class Login extends Component{
     if(this.state.user)
     {
       this.props.history.push("/home")
+    }
+    if(this.state.admin)
+    {
+      this.props.history.push("/admin")
     }
   }
   emailchange=(event)=>
